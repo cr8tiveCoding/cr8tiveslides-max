@@ -16,10 +16,10 @@ void SlideCache::loadImages(const char* dir) {
     }
 }
 
-int SlideCache::size() {
+int SlideCache::size() const {
     return static_cast<int>(slides.size());
 }
 
-Slide* SlideCache::getSlide(int index) {
+Slide* SlideCache::getSlide(int index) const {
     return slides[index];
 }

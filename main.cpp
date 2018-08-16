@@ -1,17 +1,19 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "SlideCache.h"
+#include "SlideCycler.h"
 
 
 int main() {
 
-    sf::RenderWindow window(sf::VideoMode::getFullscreenModes()[0], "Slides", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode::getFullscreenModes()[0], "Slides", sf::Style::None);
     window.setPosition(sf::Vector2i(0, 0));
 
     SlideCache slides("images/");
+    SlideCycler cycler(&slides, &window, 1.5);
 
     sf::Clock clock;
-    for (int i = 0; window.isOpen();) {
+    while (window.isOpen()) {
         sf::Event event = {};
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed ||
@@ -19,13 +21,9 @@ int main() {
                 window.close();
             }
         }
-        window.clear(sf::Color::Blue);
-        if (clock.getElapsedTime().asSeconds() >= 1.5) {
-            i = (i + 1) % slides.size();
-            clock.restart();
-        }
-        window.draw(*slides.getSlide(i)->getSprite());
 
+        window.clear(sf::Color::Blue);
+        cycler.tick();
         window.display();
     }
 

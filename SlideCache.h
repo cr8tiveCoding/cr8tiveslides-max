@@ -12,8 +12,8 @@ private:
 public:
     explicit SlideCache(const char* dir);
     void loadImages(const char* dir);
-    int size();
-    Slide* getSlide(int index);
+    int size() const;
+    Slide* getSlide(int index) const;
 };
 
 
