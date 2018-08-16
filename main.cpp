@@ -1,30 +1,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "SlideCache.h"
 
-void setSize(sf::Sprite& sprite, sf::Vector2f target) {
-    sf::Vector2f size = (sf::Vector2f) sprite.getTexture()->getSize();
-    sprite.setScale(target.x/size.x, target.y/size.y);
-}
 
 int main() {
 
-    unsigned int w = sf::VideoMode::getDesktopMode().width,
-                 h = sf::VideoMode::getDesktopMode().height;
-
     sf::RenderWindow window(sf::VideoMode::getFullscreenModes()[0], "Slides", sf::Style::Fullscreen);
     window.setPosition(sf::Vector2i(0, 0));
-    sf::Image staticImage;
-    sf::Texture texture;
-    sf::Sprite imageSprite;
 
-    if(!staticImage.loadFromFile("images/bravo.jpg")) {
-        std::exit(1);
-    }
-
-    texture.loadFromImage(staticImage);
-    imageSprite.setTexture(texture);
-
-    setSize(imageSprite, sf::Vector2f(w, h));
+    SlideCache slides("images/");
 
     while (window.isOpen()) {
         sf::Event event = {};
@@ -36,7 +20,7 @@ int main() {
         }
         window.clear(sf::Color::Blue);
 
-        window.draw(imageSprite);
+        window.draw(*slides.getSlide(0)->getSprite());
 
         window.display();
     }
