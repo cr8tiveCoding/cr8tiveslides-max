@@ -12,7 +12,7 @@ private:
 public:
     explicit SlideCache(const char* dir);
     void loadImages(const char* dir);
-    unsigned long size();
+    int size();
     Slide* getSlide(int index);
 };
 

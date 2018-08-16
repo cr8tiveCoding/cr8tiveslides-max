@@ -10,7 +10,8 @@ int main() {
 
     SlideCache slides("images/");
 
-    while (window.isOpen()) {
+    sf::Clock clock;
+    for (int i = 0; window.isOpen();) {
         sf::Event event = {};
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed ||
@@ -19,8 +20,11 @@ int main() {
             }
         }
         window.clear(sf::Color::Blue);
-
-        window.draw(*slides.getSlide(0)->getSprite());
+        if (clock.getElapsedTime().asSeconds() >= 1.5) {
+            i = (i + 1) % slides.size();
+            clock.restart();
+        }
+        window.draw(*slides.getSlide(i)->getSprite());
 
         window.display();
     }

@@ -1,13 +1,15 @@
-# SlideShow Prototype Thing
+# CreativeSlides WIP Prototype
 
-Currently just shows an image.
+Currently cycles through all images in `./images`
 
 ## Dependencies
 SFML 2.5 (sfml-graphics)
 
 ## How to Build
-*Requires CMake >=3.5*
-`cd <here>`
-`cmake .`
-`make`
+Requires CMake >=3.5 and a C++17 compliant compiler
+```
+cd <project>
+cmake .
+make
+```
 Will result in the executable `CreativeSlides`

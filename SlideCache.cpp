@@ -1,10 +1,10 @@
 #include <utility>
 
 #include "SlideCache.h"
-#include <experimental/filesystem>
+#include <filesystem>
 #include <iostream>
 
-namespace fs = std::experimental::filesystem;
+namespace fs = std::filesystem;
 
 SlideCache::SlideCache(const char* dir) {
     loadImages(dir);
@@ -16,8 +16,8 @@ void SlideCache::loadImages(const char* dir) {
     }
 }
 
-unsigned long SlideCache::size() {
-    return slides.size();
+int SlideCache::size() {
+    return static_cast<int>(slides.size());
 }
 
 Slide* SlideCache::getSlide(int index) {
