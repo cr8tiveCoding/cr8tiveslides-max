@@ -7,7 +7,7 @@ SlideCycler::SlideCycler(SlideCache const *slides, sf::RenderWindow *renderWindo
     this->secondsPer = secondsPer;
     slideNumber = 0;
     inTransition = false;
-    currentSlide = cache->getSlide(0);
+    currentSlide = new Slide(cache->getSlide(0)->getSprite());
     desktopWidth = sf::VideoMode::getDesktopMode().width;
 }
 
@@ -27,7 +27,9 @@ void SlideCycler::tick() {
         window->draw(*transitionSlide->getSprite());
 
         if (transitionSprite->getPosition().x < 1) {
+            delete currentSlide;
             currentSlide = new Slide(transitionSlide->getSprite());
+            delete transitionSlide;
             inTransition = false;
             clock.restart();
         }
@@ -35,11 +37,8 @@ void SlideCycler::tick() {
     } else if (clock.getElapsedTime().asSeconds() >= secondsPer) {
         slideNumber = (slideNumber + 1) % cache->size();
         inTransition = true;
-        currentSlide = new Slide(currentSlide->getSprite());
         transitionSlide = new Slide(cache->getSlide(slideNumber)->getSprite());
-
         transitionSlide->getSprite()->move(desktopWidth, 0);
-
         clock.restart();
     }
     window->draw(*currentSlide->getSprite());
