@@ -6,7 +6,7 @@ Currently cycles through all images in `./images`
 SFML 2.5 (sfml-graphics)
 
 ## How to Build
-Requires CMake >=3.5 and a C++17 compliant compiler
+Requires CMake >=3.12 and a C++17 compliant compiler
 ```
 cd <project>
 cmake .
