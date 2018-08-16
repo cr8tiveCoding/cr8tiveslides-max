@@ -11,7 +11,9 @@ private:
     sf::Texture* texture;
     sf::Sprite* sprite;
 public:
-    Slide(const char* path);
+    explicit Slide(const char* path);
+    explicit Slide(sf::Sprite* spr);
+    ~Slide();
     sf::Sprite* getSprite() const;
 };
 
