@@ -13,12 +13,12 @@ Slide::Slide(const char* path) {
     setSpriteSize(*sprite, sf::Vector2f(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
 }
 
-Slide::Slide(sf::Sprite* spr) {
+Slide::Slide(const Slide& old) {
     sprite = new sf::Sprite();
     texture = new sf::Texture();
-    texture->loadFromImage(spr->getTexture()->copyToImage());
+    texture->loadFromImage(old.getSprite()->getTexture()->copyToImage());
     sprite->setTexture(*texture);
-    setSpriteSize(*sprite, sf::Vector2f(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
+    sprite->setScale(old.getSprite()->getScale());
 }
 
 sf::Sprite* Slide::getSprite() const {

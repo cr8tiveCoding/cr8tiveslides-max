@@ -12,7 +12,7 @@ private:
     sf::Sprite* sprite;
 public:
     explicit Slide(const char* path);
-    explicit Slide(sf::Sprite* spr);
+    Slide(const Slide&);
     ~Slide();
     sf::Sprite* getSprite() const;
 };
