@@ -5,7 +5,7 @@
 #include <SFML/System.hpp>
 
 void setSpriteSize(sf::Sprite& sprite, sf::Vector2f target) {
-    sf::Vector2f size = (sf::Vector2f) sprite.getTexture()->getSize();
+    auto size = static_cast<sf::Vector2f>(sprite.getTexture()->getSize());
     sprite.setScale(target.x/size.x, target.y/size.y);
 }
 

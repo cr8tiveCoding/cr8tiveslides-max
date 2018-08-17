@@ -18,13 +18,12 @@ void SlideCycler::tick() {
         float transitionX = transitionSprite->getPosition().x;
 
         back = transitionX * (transitionX / (desktopWidth * 5));
-        if (back > 10) back = 10;
-        if (back < 0.7) back = 0.7;
+        back = std::clamp(back, 0.7f, 10.f);
 
         currentSlide->getSprite()->move(-back, 0);
         transitionSprite->move(-back, 0);
 
-        window->draw(*transitionSlide->getSprite());
+        window->draw(*transitionSprite);
 
         if (transitionSprite->getPosition().x < 1) {
             delete currentSlide;
